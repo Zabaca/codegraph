@@ -5,6 +5,8 @@ import { shouldExcludePath } from '../utils/path.util';
 
 @Injectable()
 export class FileScannerService {
+  private skippedDirs: string[] = [];
+
   /**
    * Scan directory for TypeScript files
    * @param directory Starting directory (defaults to current working directory)
@@ -13,9 +15,15 @@ export class FileScannerService {
    */
   async scanDirectory(directory: string = process.cwd(), pattern?: string): Promise<string[]> {
     const files: string[] = [];
+    this.skippedDirs = []; // Reset skipped directories counter
 
     // Start scanning from the specified directory
     await this.scanRecursive(directory, files);
+
+    // Show summary of skipped directories if any
+    if (this.skippedDirs.length > 0) {
+      console.log(`ℹ️  Skipped ${this.skippedDirs.length} ${this.skippedDirs.length === 1 ? 'directory' : 'directories'} due to permissions`);
+    }
 
     return files;
   }
@@ -36,8 +44,18 @@ export class FileScannerService {
         }
 
         if (entry.isDirectory()) {
-          // Recursively scan subdirectories
-          await this.scanRecursive(fullPath, files);
+          try {
+            // Recursively scan subdirectories
+            await this.scanRecursive(fullPath, files);
+          } catch (error) {
+            // Silently skip directories with permission errors
+            if (this.isPermissionError(error)) {
+              this.skippedDirs.push(fullPath);
+              continue;
+            }
+            // Re-throw other errors
+            throw error;
+          }
         } else if (entry.isFile() && entry.name.endsWith('.ts')) {
           // Add TypeScript files (excluding test and declaration files)
           if (!entry.name.endsWith('.test.ts') &&
@@ -48,8 +66,24 @@ export class FileScannerService {
         }
       }
     } catch (error) {
+      // Handle permission errors at the root level
+      if (this.isPermissionError(error)) {
+        this.skippedDirs.push(dir);
+        return;
+      }
+
+      // Log other types of errors
       console.error(`Error scanning directory ${dir}:`, error);
     }
+  }
+
+  /**
+   * Check if an error is a permission error
+   */
+  private isPermissionError(error: any): boolean {
+    return error?.code === 'EACCES' ||
+           error?.code === 'EPERM' ||
+           error?.message?.includes('permission denied');
   }
 
   /**

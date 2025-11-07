@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 import 'reflect-metadata';
 import { CommandFactory } from 'nest-commander';
 import { AppModule } from './app.module';
