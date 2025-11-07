@@ -138,8 +138,19 @@ You can choose to:
 
 ## Installation
 
+### Global Installation
+
 ```bash
-bun install -g codegraph
+npm install -g @zabaca/codegraph
+# or
+bun install -g @zabaca/codegraph
+```
+
+### Use without installation (npx/bunx)
+
+```bash
+npx @zabaca/codegraph update
+bunx @zabaca/codegraph query "file.ts::ClassName"
 ```
 
 ## Development
