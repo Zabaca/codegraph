@@ -1,8 +1,59 @@
 {
   "version": "1.0.0",
-  "commitHash": "e0c5693",
-  "timestamp": "2025-11-07T01:23:35.031Z",
+  "commitHash": "cd7bf13",
+  "timestamp": "2025-11-07T01:55:11.933Z",
   "nodes": {
+    "src/utils/output-formatter.util.ts": {
+      "type": "file"
+    },
+    "src/utils/output-formatter.util.ts::formatQueryAsTree": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 8,
+      "endLine": 42
+    },
+    "src/utils/output-formatter.util.ts::formatQueryAsList": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 47,
+      "endLine": 72
+    },
+    "src/utils/output-formatter.util.ts::formatImpactReport": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 77,
+      "endLine": 130
+    },
+    "src/utils/output-formatter.util.ts::formatDiffReport": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 135,
+      "endLine": 199
+    },
+    "src/utils/output-formatter.util.ts::groupByDepth": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 204,
+      "endLine": 215
+    },
+    "src/utils/output-formatter.util.ts::buildTreePrefix": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 220,
+      "endLine": 224
+    },
+    "src/utils/output-formatter.util.ts::formatRiskLevel": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 229,
+      "endLine": 237
+    },
+    "src/utils/output-formatter.util.ts::getRiskRecommendation": {
+      "type": "function",
+      "file": "src/utils/output-formatter.util.ts",
+      "line": 242,
+      "endLine": 250
+    },
     "src/utils/entity-id.util.ts": {
       "type": "file"
     },
@@ -63,6 +114,54 @@
       "line": 50,
       "endLine": 71
     },
+    "src/utils/graph-traversal.util.ts": {
+      "type": "file"
+    },
+    "src/utils/graph-traversal.util.ts::traverseBFS": {
+      "type": "function",
+      "file": "src/utils/graph-traversal.util.ts",
+      "line": 19,
+      "endLine": 75
+    },
+    "src/utils/graph-traversal.util.ts::traverseDFS": {
+      "type": "function",
+      "file": "src/utils/graph-traversal.util.ts",
+      "line": 85,
+      "endLine": 138
+    },
+    "src/utils/graph-traversal.util.ts::getNeighbors": {
+      "type": "function",
+      "file": "src/utils/graph-traversal.util.ts",
+      "line": 147,
+      "endLine": 163
+    },
+    "src/utils/graph-traversal.util.ts::buildReverseIndex": {
+      "type": "function",
+      "file": "src/utils/graph-traversal.util.ts",
+      "line": 170,
+      "endLine": 183
+    },
+    "src/utils/graph-traversal.util.ts::buildForwardIndex": {
+      "type": "function",
+      "file": "src/utils/graph-traversal.util.ts",
+      "line": 190,
+      "endLine": 203
+    },
+    "src/utils/graph-traversal.util.ts::detectCycles": {
+      "type": "function",
+      "file": "src/utils/graph-traversal.util.ts",
+      "line": 210,
+      "endLine": 243
+    },
+    "src/interfaces/impact.interface.ts": {
+      "type": "file"
+    },
+    "src/interfaces/query.interface.ts": {
+      "type": "file"
+    },
+    "src/interfaces/diff.interface.ts": {
+      "type": "file"
+    },
     "src/interfaces/graph.interface.ts": {
       "type": "file"
     },
@@ -72,8 +171,71 @@
     "src/app.module.ts::AppModule": {
       "type": "class",
       "file": "src/app.module.ts",
-      "line": 8,
+      "line": 15,
+      "endLine": 33
+    },
+    "src/services/graph-query.service.ts": {
+      "type": "file"
+    },
+    "src/services/graph-query.service.ts::GraphQueryService": {
+      "type": "class",
+      "file": "src/services/graph-query.service.ts",
+      "line": 7,
+      "endLine": 183
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::getEntity": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 15,
       "endLine": 17
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::findEntitiesByFile": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 25,
+      "endLine": 36
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::getDependencies": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 45,
+      "endLine": 61
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::getDependents": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 70,
+      "endLine": 86
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::query": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 96,
+      "endLine": 130
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::getRelationship": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 139,
+      "endLine": 148
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::getEdgesForEntity": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 156,
+      "endLine": 160
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::entityExists": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 168,
+      "endLine": 170
+    },
+    "src/services/graph-query.service.ts::GraphQueryService::getEntitiesByType": {
+      "type": "method",
+      "file": "src/services/graph-query.service.ts",
+      "line": 178,
+      "endLine": 182
     },
     "src/services/parser.service.ts": {
       "type": "file"
@@ -159,6 +321,96 @@
       "line": 65,
       "endLine": 80
     },
+    "src/services/graph-reader.service.ts": {
+      "type": "file"
+    },
+    "src/services/graph-reader.service.ts::GraphReaderService": {
+      "type": "class",
+      "file": "src/services/graph-reader.service.ts",
+      "line": 6,
+      "endLine": 126
+    },
+    "src/services/graph-reader.service.ts::GraphReaderService::loadCurrentGraph": {
+      "type": "method",
+      "file": "src/services/graph-reader.service.ts",
+      "line": 16,
+      "endLine": 31
+    },
+    "src/services/graph-reader.service.ts::GraphReaderService::loadGraphFromCommit": {
+      "type": "method",
+      "file": "src/services/graph-reader.service.ts",
+      "line": 39,
+      "endLine": 72
+    },
+    "src/services/graph-reader.service.ts::GraphReaderService::graphExists": {
+      "type": "method",
+      "file": "src/services/graph-reader.service.ts",
+      "line": 80,
+      "endLine": 98
+    },
+    "src/services/graph-reader.service.ts::GraphReaderService::getGraphPath": {
+      "type": "method",
+      "file": "src/services/graph-reader.service.ts",
+      "line": 105,
+      "endLine": 107
+    },
+    "src/services/graph-reader.service.ts::GraphReaderService::getGraphMetadata": {
+      "type": "method",
+      "file": "src/services/graph-reader.service.ts",
+      "line": 114,
+      "endLine": 125
+    },
+    "src/services/graph-diff.service.ts": {
+      "type": "file"
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService": {
+      "type": "class",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 10,
+      "endLine": 191
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::compareGraphs": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 18,
+      "endLine": 59
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::findModifiedNodes": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 68,
+      "endLine": 92
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::detectNodeChanges": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 100,
+      "endLine": 120
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::compareEdges": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 128,
+      "endLine": 149
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::edgeToString": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 156,
+      "endLine": 158
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::getStats": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 165,
+      "endLine": 172
+    },
+    "src/services/graph-diff.service.ts::GraphDiffService::areGraphsIdentical": {
+      "type": "method",
+      "file": "src/services/graph-diff.service.ts",
+      "line": 180,
+      "endLine": 190
+    },
     "src/services/git.service.ts": {
       "type": "file"
     },
@@ -166,7 +418,7 @@
       "type": "class",
       "file": "src/services/git.service.ts",
       "line": 5,
-      "endLine": 82
+      "endLine": 187
     },
     "src/services/git.service.ts::GitService::getCurrentCommitHash": {
       "type": "method",
@@ -191,6 +443,63 @@
       "file": "src/services/git.service.ts",
       "line": 79,
       "endLine": 81
+    },
+    "src/services/git.service.ts::GitService::getChangedFiles": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 89,
+      "endLine": 115
+    },
+    "src/services/git.service.ts::GitService::getUnstagedChanges": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 122,
+      "endLine": 141
+    },
+    "src/services/git.service.ts::GitService::isWorkingDirectoryClean": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 148,
+      "endLine": 161
+    },
+    "src/services/git.service.ts::GitService::commitExists": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 169,
+      "endLine": 186
+    },
+    "src/services/impact-analysis.service.ts": {
+      "type": "file"
+    },
+    "src/services/impact-analysis.service.ts::ImpactAnalysisService": {
+      "type": "class",
+      "file": "src/services/impact-analysis.service.ts",
+      "line": 11,
+      "endLine": 176
+    },
+    "src/services/impact-analysis.service.ts::ImpactAnalysisService::analyzeImpact": {
+      "type": "method",
+      "file": "src/services/impact-analysis.service.ts",
+      "line": 21,
+      "endLine": 100
+    },
+    "src/services/impact-analysis.service.ts::ImpactAnalysisService::calculateRiskLevel": {
+      "type": "method",
+      "file": "src/services/impact-analysis.service.ts",
+      "line": 107,
+      "endLine": 125
+    },
+    "src/services/impact-analysis.service.ts::ImpactAnalysisService::createEmptyReport": {
+      "type": "method",
+      "file": "src/services/impact-analysis.service.ts",
+      "line": 131,
+      "endLine": 150
+    },
+    "src/services/impact-analysis.service.ts::ImpactAnalysisService::filterByThreshold": {
+      "type": "method",
+      "file": "src/services/impact-analysis.service.ts",
+      "line": 158,
+      "endLine": 175
     },
     "src/cli.ts": {
       "type": "file"
@@ -261,14 +570,89 @@
   },
   "edges": [
     {
+      "source": "src/utils/output-formatter.util.ts::formatQueryAsTree",
+      "relationship": "calls",
+      "target": "src/utils/output-formatter.util.ts::groupByDepth"
+    },
+    {
+      "source": "src/utils/output-formatter.util.ts::formatQueryAsTree",
+      "relationship": "calls",
+      "target": "src/utils/output-formatter.util.ts::buildTreePrefix"
+    },
+    {
+      "source": "src/utils/output-formatter.util.ts::formatImpactReport",
+      "relationship": "calls",
+      "target": "src/utils/output-formatter.util.ts::formatRiskLevel"
+    },
+    {
+      "source": "src/utils/output-formatter.util.ts::formatImpactReport",
+      "relationship": "calls",
+      "target": "src/utils/output-formatter.util.ts::getRiskRecommendation"
+    },
+    {
       "source": "src/utils/path.util.ts::resolveImportPath",
       "relationship": "calls",
       "target": "src/utils/path.util.ts::normalizePath"
     },
     {
+      "source": "src/utils/graph-traversal.util.ts::traverseBFS",
+      "relationship": "calls",
+      "target": "src/utils/graph-traversal.util.ts::getNeighbors"
+    },
+    {
+      "source": "src/utils/graph-traversal.util.ts::traverseDFS",
+      "relationship": "calls",
+      "target": "src/utils/graph-traversal.util.ts::getNeighbors"
+    },
+    {
+      "source": "src/utils/graph-traversal.util.ts::traverseDFS",
+      "relationship": "calls",
+      "target": "src/utils/graph-traversal.util.ts::dfs"
+    },
+    {
+      "source": "src/utils/graph-traversal.util.ts::detectCycles",
+      "relationship": "calls",
+      "target": "src/utils/graph-traversal.util.ts::getNeighbors"
+    },
+    {
+      "source": "src/utils/graph-traversal.util.ts::detectCycles",
+      "relationship": "calls",
+      "target": "src/utils/graph-traversal.util.ts::dfs"
+    },
+    {
+      "source": "src/interfaces/impact.interface.ts",
+      "relationship": "imports",
+      "target": "src/interfaces/graph.interface.ts"
+    },
+    {
+      "source": "src/interfaces/query.interface.ts",
+      "relationship": "imports",
+      "target": "src/interfaces/graph.interface.ts"
+    },
+    {
+      "source": "src/interfaces/diff.interface.ts",
+      "relationship": "imports",
+      "target": "src/interfaces/graph.interface.ts"
+    },
+    {
       "source": "src/app.module.ts",
       "relationship": "imports",
       "target": "src/commands/update.command.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/commands/query.command.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/commands/impact.command.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/commands/diff.command.ts"
     },
     {
       "source": "src/app.module.ts",
@@ -289,6 +673,66 @@
       "source": "src/app.module.ts",
       "relationship": "imports",
       "target": "src/services/git.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-reader.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-query.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/impact-analysis.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-diff.service.ts"
+    },
+    {
+      "source": "src/services/graph-query.service.ts",
+      "relationship": "imports",
+      "target": "src/utils/graph-traversal.util.ts"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::getDependencies",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::traverseBFS"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::getDependencies",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::GraphQueryService::getRelationship"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::getDependents",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::traverseBFS"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::getDependents",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::GraphQueryService::getRelationship"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::query",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::GraphQueryService::getEntity"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::query",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::GraphQueryService::getDependencies"
+    },
+    {
+      "source": "src/services/graph-query.service.ts::GraphQueryService::query",
+      "relationship": "calls",
+      "target": "src/services/graph-query.service.ts::GraphQueryService::getDependents"
     },
     {
       "source": "src/services/parser.service.ts",
@@ -364,6 +808,81 @@
       "source": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive",
       "relationship": "calls",
       "target": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive"
+    },
+    {
+      "source": "src/services/graph-reader.service.ts::GraphReaderService::loadCurrentGraph",
+      "relationship": "calls",
+      "target": "src/services/graph-reader.service.ts::GraphReaderService::getGraphPath"
+    },
+    {
+      "source": "src/services/graph-reader.service.ts::GraphReaderService::loadCurrentGraph",
+      "relationship": "calls",
+      "target": "src/services/graph-reader.service.ts::GraphReaderService::graphExists"
+    },
+    {
+      "source": "src/services/graph-reader.service.ts::GraphReaderService::graphExists",
+      "relationship": "calls",
+      "target": "src/services/graph-reader.service.ts::GraphReaderService::getGraphPath"
+    },
+    {
+      "source": "src/services/graph-reader.service.ts::GraphReaderService::getGraphMetadata",
+      "relationship": "calls",
+      "target": "src/services/graph-reader.service.ts::GraphReaderService::loadCurrentGraph"
+    },
+    {
+      "source": "src/services/graph-diff.service.ts::GraphDiffService::compareGraphs",
+      "relationship": "calls",
+      "target": "src/services/graph-diff.service.ts::GraphDiffService::findModifiedNodes"
+    },
+    {
+      "source": "src/services/graph-diff.service.ts::GraphDiffService::compareGraphs",
+      "relationship": "calls",
+      "target": "src/services/graph-diff.service.ts::GraphDiffService::compareEdges"
+    },
+    {
+      "source": "src/services/graph-diff.service.ts::GraphDiffService::findModifiedNodes",
+      "relationship": "calls",
+      "target": "src/services/graph-diff.service.ts::GraphDiffService::detectNodeChanges"
+    },
+    {
+      "source": "src/services/graph-diff.service.ts::GraphDiffService::compareEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-diff.service.ts::GraphDiffService::edgeToString"
+    },
+    {
+      "source": "src/services/graph-diff.service.ts::GraphDiffService::areGraphsIdentical",
+      "relationship": "calls",
+      "target": "src/services/graph-diff.service.ts::GraphDiffService::compareGraphs"
+    },
+    {
+      "source": "src/services/impact-analysis.service.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-query.service.ts"
+    },
+    {
+      "source": "src/services/impact-analysis.service.ts::ImpactAnalysisService::analyzeImpact",
+      "relationship": "calls",
+      "target": "src/services/impact-analysis.service.ts::ImpactAnalysisService::createEmptyReport"
+    },
+    {
+      "source": "src/services/impact-analysis.service.ts::ImpactAnalysisService::analyzeImpact",
+      "relationship": "calls",
+      "target": "src/services/impact-analysis.service.ts::ImpactAnalysisService::graphQueryService.findEntitiesByFile"
+    },
+    {
+      "source": "src/services/impact-analysis.service.ts::ImpactAnalysisService::analyzeImpact",
+      "relationship": "calls",
+      "target": "src/services/impact-analysis.service.ts::ImpactAnalysisService::graphQueryService.getDependents"
+    },
+    {
+      "source": "src/services/impact-analysis.service.ts::ImpactAnalysisService::analyzeImpact",
+      "relationship": "calls",
+      "target": "src/services/impact-analysis.service.ts::ImpactAnalysisService::calculateRiskLevel"
+    },
+    {
+      "source": "src/services/impact-analysis.service.ts::ImpactAnalysisService::filterByThreshold",
+      "relationship": "calls",
+      "target": "src/services/impact-analysis.service.ts::ImpactAnalysisService::createEmptyReport"
     },
     {
       "source": "src/cli.ts",

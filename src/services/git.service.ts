@@ -79,4 +79,109 @@ export class GitService {
   getGraphPath(projectRoot: string): string {
     return path.join(projectRoot, this.GRAPH_DIR, this.GRAPH_FILE);
   }
+
+  /**
+   * Get list of changed files in working directory compared to a base commit
+   * @param projectRoot Project root directory
+   * @param baseCommit Base commit to compare against (default: HEAD)
+   * @returns Array of changed file paths (relative to project root)
+   */
+  async getChangedFiles(
+    projectRoot: string,
+    baseCommit: string = 'HEAD'
+  ): Promise<string[]> {
+    try {
+      // Get both staged and unstaged changes
+      const proc = Bun.spawn(
+        ['git', 'diff', '--name-only', baseCommit],
+        {
+          cwd: projectRoot,
+          stdout: 'pipe',
+        }
+      );
+
+      const output = await new Response(proc.stdout).text();
+      const files = output
+        .trim()
+        .split('\n')
+        .filter((f) => f.length > 0)
+        .filter((f) => f.endsWith('.ts') || f.endsWith('.tsx'));
+
+      return files;
+    } catch (error) {
+      console.error('Error getting changed files:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get unstaged changes (working directory vs index)
+   * @param projectRoot Project root directory
+   * @returns Array of unstaged file paths
+   */
+  async getUnstagedChanges(projectRoot: string): Promise<string[]> {
+    try {
+      const proc = Bun.spawn(['git', 'diff', '--name-only'], {
+        cwd: projectRoot,
+        stdout: 'pipe',
+      });
+
+      const output = await new Response(proc.stdout).text();
+      const files = output
+        .trim()
+        .split('\n')
+        .filter((f) => f.length > 0)
+        .filter((f) => f.endsWith('.ts') || f.endsWith('.tsx'));
+
+      return files;
+    } catch (error) {
+      console.error('Error getting unstaged changes:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Check if working directory is clean (no changes)
+   * @param projectRoot Project root directory
+   * @returns True if working directory is clean
+   */
+  async isWorkingDirectoryClean(projectRoot: string): Promise<boolean> {
+    try {
+      const proc = Bun.spawn(['git', 'status', '--porcelain'], {
+        cwd: projectRoot,
+        stdout: 'pipe',
+      });
+
+      const output = await new Response(proc.stdout).text();
+      return output.trim().length === 0;
+    } catch (error) {
+      console.error('Error checking working directory status:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Validate that a commit hash exists
+   * @param projectRoot Project root directory
+   * @param commitHash Commit hash to validate
+   * @returns True if commit exists
+   */
+  async commitExists(
+    projectRoot: string,
+    commitHash: string
+  ): Promise<boolean> {
+    try {
+      const proc = Bun.spawn(
+        ['git', 'cat-file', '-e', `${commitHash}^{commit}`],
+        {
+          cwd: projectRoot,
+        }
+      );
+
+      const exitCode = await proc.exited;
+      return exitCode === 0;
+    } catch (error) {
+      return false;
+    }
+  }
 }
