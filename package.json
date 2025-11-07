@@ -1,6 +1,6 @@
 {
   "name": "@zabaca/codegraph",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript dependency graph analyzer for visualizing code relationships and analyzing impact of changes",
   "type": "module",
   "bin": {
