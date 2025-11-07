@@ -4,6 +4,7 @@ import { FileScannerService } from '../services/file-scanner.service';
 import { GraphReaderService } from '../services/graph-reader.service';
 import { ImpactAnalysisService } from '../services/impact-analysis.service';
 import { GitService } from '../services/git.service';
+import { UpdateCommand } from './update.command';
 import type { RiskLevel } from '../interfaces/impact.interface';
 import { formatImpactReport } from '../utils/output-formatter.util';
 
@@ -23,7 +24,8 @@ export class ImpactCommand extends CommandRunner {
     private readonly fileScannerService: FileScannerService,
     private readonly graphReaderService: GraphReaderService,
     private readonly impactAnalysisService: ImpactAnalysisService,
-    private readonly gitService: GitService
+    private readonly gitService: GitService,
+    private readonly updateCommand: UpdateCommand
   ) {
     super();
   }
@@ -33,9 +35,10 @@ export class ImpactCommand extends CommandRunner {
       // Get project root
       const projectRoot = this.fileScannerService.getProjectRoot();
 
-      // Load current graph
-      console.log('📊 Loading graph...');
-      const graph = this.graphReaderService.loadCurrentGraph(projectRoot);
+      // Regenerate graph to ensure accurate impact analysis
+      console.log('📊 Updating dependency graph...\n');
+      const graph = await this.updateCommand.generateGraph({ verbose: true });
+      console.log();
 
       // Get changed files
       const baseCommit = options.base || 'HEAD';
