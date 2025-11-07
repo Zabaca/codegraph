@@ -16,7 +16,9 @@
     "moduleResolution": "bundler",
     "types": ["bun-types"],
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
