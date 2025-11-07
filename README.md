@@ -53,15 +53,15 @@ repo/.git/refs/heads/
 ## Installation
 
 ```bash
-npm install -g codegraph
+bun install -g codegraph
 ```
 
 ## Development
 
 ```bash
-npm install
-npm run build
-npm run dev
+bun install
+bun run build
+bun run dev
 ```
 
 ## License
