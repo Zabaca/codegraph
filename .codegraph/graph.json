@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "commitHash": "cd7bf13",
-  "timestamp": "2025-11-07T01:55:11.933Z",
+  "commitHash": "c1ea09a",
+  "timestamp": "2025-11-07T02:09:41.618Z",
   "nodes": {
     "src/utils/output-formatter.util.ts": {
       "type": "file"
@@ -106,13 +106,13 @@
       "type": "function",
       "file": "src/utils/path.util.ts",
       "line": 21,
-      "endLine": 41
+      "endLine": 42
     },
     "src/utils/path.util.ts::resolveImportPath": {
       "type": "function",
       "file": "src/utils/path.util.ts",
-      "line": 50,
-      "endLine": 71
+      "line": 51,
+      "endLine": 72
     },
     "src/utils/graph-traversal.util.ts": {
       "type": "file"
@@ -152,6 +152,126 @@
       "file": "src/utils/graph-traversal.util.ts",
       "line": 210,
       "endLine": 243
+    },
+    "src/commands/impact.command.ts": {
+      "type": "file"
+    },
+    "src/commands/impact.command.ts::ImpactCommand": {
+      "type": "class",
+      "file": "src/commands/impact.command.ts",
+      "line": 16,
+      "endLine": 117
+    },
+    "src/commands/impact.command.ts::ImpactCommand::run": {
+      "type": "method",
+      "file": "src/commands/impact.command.ts",
+      "line": 31,
+      "endLine": 83
+    },
+    "src/commands/impact.command.ts::ImpactCommand::parseBase": {
+      "type": "method",
+      "file": "src/commands/impact.command.ts",
+      "line": 85,
+      "endLine": 91
+    },
+    "src/commands/impact.command.ts::ImpactCommand::parseFormat": {
+      "type": "method",
+      "file": "src/commands/impact.command.ts",
+      "line": 93,
+      "endLine": 102
+    },
+    "src/commands/impact.command.ts::ImpactCommand::parseThreshold": {
+      "type": "method",
+      "file": "src/commands/impact.command.ts",
+      "line": 104,
+      "endLine": 116
+    },
+    "src/commands/query.command.ts": {
+      "type": "file"
+    },
+    "src/commands/query.command.ts::QueryCommand": {
+      "type": "class",
+      "file": "src/commands/query.command.ts",
+      "line": 18,
+      "endLine": 109
+    },
+    "src/commands/query.command.ts::QueryCommand::run": {
+      "type": "method",
+      "file": "src/commands/query.command.ts",
+      "line": 36,
+      "endLine": 81
+    },
+    "src/commands/query.command.ts::QueryCommand::parseDependents": {
+      "type": "method",
+      "file": "src/commands/query.command.ts",
+      "line": 83,
+      "endLine": 89
+    },
+    "src/commands/query.command.ts::QueryCommand::parseTransitive": {
+      "type": "method",
+      "file": "src/commands/query.command.ts",
+      "line": 91,
+      "endLine": 97
+    },
+    "src/commands/query.command.ts::QueryCommand::parseFormat": {
+      "type": "method",
+      "file": "src/commands/query.command.ts",
+      "line": 99,
+      "endLine": 108
+    },
+    "src/commands/diff.command.ts": {
+      "type": "file"
+    },
+    "src/commands/diff.command.ts::DiffCommand": {
+      "type": "class",
+      "file": "src/commands/diff.command.ts",
+      "line": 16,
+      "endLine": 158
+    },
+    "src/commands/diff.command.ts::DiffCommand::run": {
+      "type": "method",
+      "file": "src/commands/diff.command.ts",
+      "line": 36,
+      "endLine": 122
+    },
+    "src/commands/diff.command.ts::DiffCommand::parseSummary": {
+      "type": "method",
+      "file": "src/commands/diff.command.ts",
+      "line": 124,
+      "endLine": 130
+    },
+    "src/commands/diff.command.ts::DiffCommand::parseNodesOnly": {
+      "type": "method",
+      "file": "src/commands/diff.command.ts",
+      "line": 132,
+      "endLine": 138
+    },
+    "src/commands/diff.command.ts::DiffCommand::parseEdgesOnly": {
+      "type": "method",
+      "file": "src/commands/diff.command.ts",
+      "line": 140,
+      "endLine": 146
+    },
+    "src/commands/diff.command.ts::DiffCommand::parseFormat": {
+      "type": "method",
+      "file": "src/commands/diff.command.ts",
+      "line": 148,
+      "endLine": 157
+    },
+    "src/commands/update.command.ts": {
+      "type": "file"
+    },
+    "src/commands/update.command.ts::UpdateCommand": {
+      "type": "class",
+      "file": "src/commands/update.command.ts",
+      "line": 10,
+      "endLine": 96
+    },
+    "src/commands/update.command.ts::UpdateCommand::run": {
+      "type": "method",
+      "file": "src/commands/update.command.ts",
+      "line": 25,
+      "endLine": 95
     },
     "src/interfaces/impact.interface.ts": {
       "type": "file"
@@ -618,6 +738,281 @@
       "source": "src/utils/graph-traversal.util.ts::detectCycles",
       "relationship": "calls",
       "target": "src/utils/graph-traversal.util.ts::dfs"
+    },
+    {
+      "source": "src/commands/impact.command.ts",
+      "relationship": "imports",
+      "target": "src/services/file-scanner.service.ts"
+    },
+    {
+      "source": "src/commands/impact.command.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-reader.service.ts"
+    },
+    {
+      "source": "src/commands/impact.command.ts",
+      "relationship": "imports",
+      "target": "src/services/impact-analysis.service.ts"
+    },
+    {
+      "source": "src/commands/impact.command.ts",
+      "relationship": "imports",
+      "target": "src/services/git.service.ts"
+    },
+    {
+      "source": "src/commands/impact.command.ts",
+      "relationship": "imports",
+      "target": "src/utils/output-formatter.util.ts"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::ImpactCommand::fileScannerService.getProjectRoot"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::ImpactCommand::graphReaderService.loadCurrentGraph"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::ImpactCommand::gitService.getChangedFiles"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::ImpactCommand::impactAnalysisService.analyzeImpact"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::ImpactCommand::impactAnalysisService.filterByThreshold"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::formatImpactReport"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::parseBase",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::Option"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::parseFormat",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::Option"
+    },
+    {
+      "source": "src/commands/impact.command.ts::ImpactCommand::parseThreshold",
+      "relationship": "calls",
+      "target": "src/commands/impact.command.ts::Option"
+    },
+    {
+      "source": "src/commands/query.command.ts",
+      "relationship": "imports",
+      "target": "src/services/file-scanner.service.ts"
+    },
+    {
+      "source": "src/commands/query.command.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-reader.service.ts"
+    },
+    {
+      "source": "src/commands/query.command.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-query.service.ts"
+    },
+    {
+      "source": "src/commands/query.command.ts",
+      "relationship": "imports",
+      "target": "src/utils/output-formatter.util.ts"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::QueryCommand::fileScannerService.getProjectRoot"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::QueryCommand::graphReaderService.loadCurrentGraph"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::QueryCommand::graphQueryService.query"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::formatQueryAsList"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::formatQueryAsTree"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::parseDependents",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::Option"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::parseTransitive",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::Option"
+    },
+    {
+      "source": "src/commands/query.command.ts::QueryCommand::parseFormat",
+      "relationship": "calls",
+      "target": "src/commands/query.command.ts::Option"
+    },
+    {
+      "source": "src/commands/diff.command.ts",
+      "relationship": "imports",
+      "target": "src/services/file-scanner.service.ts"
+    },
+    {
+      "source": "src/commands/diff.command.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-reader.service.ts"
+    },
+    {
+      "source": "src/commands/diff.command.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-diff.service.ts"
+    },
+    {
+      "source": "src/commands/diff.command.ts",
+      "relationship": "imports",
+      "target": "src/services/git.service.ts"
+    },
+    {
+      "source": "src/commands/diff.command.ts",
+      "relationship": "imports",
+      "target": "src/utils/output-formatter.util.ts"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::DiffCommand::fileScannerService.getProjectRoot"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::DiffCommand::gitService.commitExists"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::DiffCommand::graphReaderService.loadGraphFromCommit"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::DiffCommand::graphDiffService.compareGraphs"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::DiffCommand::graphDiffService.areGraphsIdentical"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::formatDiffReport"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::parseSummary",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::Option"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::parseNodesOnly",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::Option"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::parseEdgesOnly",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::Option"
+    },
+    {
+      "source": "src/commands/diff.command.ts::DiffCommand::parseFormat",
+      "relationship": "calls",
+      "target": "src/commands/diff.command.ts::Option"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
+      "target": "src/services/file-scanner.service.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
+      "target": "src/services/parser.service.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-builder.service.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
+      "target": "src/services/git.service.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
+      "target": "src/utils/path.util.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
+      "target": "src/interfaces/graph.interface.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::fileScannerService.getProjectRoot"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::gitService.getCurrentBranch"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::gitService.getCurrentCommitHash"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::fileScannerService.scanDirectory"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::normalizePath"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::parserService.parseFile"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::graphBuilderService.buildGraph"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::run",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::UpdateCommand::gitService.writeGraph"
     },
     {
       "source": "src/interfaces/impact.interface.ts",

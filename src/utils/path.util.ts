@@ -32,8 +32,9 @@ export function shouldExcludePath(filePath: string): boolean {
 
   return excludePatterns.some(pattern => {
     if (pattern.includes('*')) {
-      // Simple glob matching
-      const regex = new RegExp(pattern.replace('*', '.*'));
+      // Simple glob matching - anchor to end of string
+      const regexPattern = pattern.replace(/\*/g, '.*').replace(/\./g, '\\.');
+      const regex = new RegExp(regexPattern + '$');
       return regex.test(filePath);
     }
     return filePath.includes(pattern);
