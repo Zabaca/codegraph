@@ -42,13 +42,19 @@ file.ts::functionName             # function
 
 ## Storage
 
-Single `graph.json` in git branch, updated per commit.
+Graph data is stored in `.codegraph/graph.json` in your repository root.
 
 ```
-repo/.git/refs/heads/
-  ├─ main/              # code
-  └─ graph-data/        # graph.json
+your-project/
+  ├─ src/              # your code
+  ├─ .codegraph/
+  │  └─ graph.json     # generated dependency graph
+  └─ package.json
 ```
+
+You can choose to:
+- **Commit it**: Track graph changes alongside code
+- **Ignore it**: Add `.codegraph/` to `.gitignore` to keep it local-only
 
 ## Installation
 

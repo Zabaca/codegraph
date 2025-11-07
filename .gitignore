@@ -37,3 +37,7 @@ temp/
 
 # TemporalBridge
 temporal-bridge.yaml
+
+# CodeGraph generated files
+# Uncomment the line below if you don't want to version the generated graph
+# .codegraph/

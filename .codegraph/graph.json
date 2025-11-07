@@ -1,0 +1,404 @@
+{
+  "version": "1.0.0",
+  "commitHash": "e0c5693",
+  "timestamp": "2025-11-07T01:23:35.031Z",
+  "nodes": {
+    "src/utils/entity-id.util.ts": {
+      "type": "file"
+    },
+    "src/utils/entity-id.util.ts::formatFileId": {
+      "type": "function",
+      "file": "src/utils/entity-id.util.ts",
+      "line": 6,
+      "endLine": 8
+    },
+    "src/utils/entity-id.util.ts::formatClassId": {
+      "type": "function",
+      "file": "src/utils/entity-id.util.ts",
+      "line": 16,
+      "endLine": 18
+    },
+    "src/utils/entity-id.util.ts::formatMethodId": {
+      "type": "function",
+      "file": "src/utils/entity-id.util.ts",
+      "line": 27,
+      "endLine": 33
+    },
+    "src/utils/entity-id.util.ts::formatFunctionId": {
+      "type": "function",
+      "file": "src/utils/entity-id.util.ts",
+      "line": 41,
+      "endLine": 46
+    },
+    "src/utils/entity-id.util.ts::formatInterfaceId": {
+      "type": "function",
+      "file": "src/utils/entity-id.util.ts",
+      "line": 54,
+      "endLine": 59
+    },
+    "src/utils/entity-id.util.ts::parseEntityId": {
+      "type": "function",
+      "file": "src/utils/entity-id.util.ts",
+      "line": 66,
+      "endLine": 92
+    },
+    "src/utils/path.util.ts": {
+      "type": "file"
+    },
+    "src/utils/path.util.ts::normalizePath": {
+      "type": "function",
+      "file": "src/utils/path.util.ts",
+      "line": 9,
+      "endLine": 14
+    },
+    "src/utils/path.util.ts::shouldExcludePath": {
+      "type": "function",
+      "file": "src/utils/path.util.ts",
+      "line": 21,
+      "endLine": 41
+    },
+    "src/utils/path.util.ts::resolveImportPath": {
+      "type": "function",
+      "file": "src/utils/path.util.ts",
+      "line": 50,
+      "endLine": 71
+    },
+    "src/interfaces/graph.interface.ts": {
+      "type": "file"
+    },
+    "src/app.module.ts": {
+      "type": "file"
+    },
+    "src/app.module.ts::AppModule": {
+      "type": "class",
+      "file": "src/app.module.ts",
+      "line": 8,
+      "endLine": 17
+    },
+    "src/services/parser.service.ts": {
+      "type": "file"
+    },
+    "src/services/parser.service.ts::ParserService": {
+      "type": "class",
+      "file": "src/services/parser.service.ts",
+      "line": 11,
+      "endLine": 183
+    },
+    "src/services/parser.service.ts::ParserService::parseFile": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 27,
+      "endLine": 40
+    },
+    "src/services/parser.service.ts::ParserService::extractClasses": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 45,
+      "endLine": 77
+    },
+    "src/services/parser.service.ts::ParserService::extractMethods": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 82,
+      "endLine": 102
+    },
+    "src/services/parser.service.ts::ParserService::extractFunctions": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 107,
+      "endLine": 129
+    },
+    "src/services/parser.service.ts::ParserService::extractCalls": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 134,
+      "endLine": 156
+    },
+    "src/services/parser.service.ts::ParserService::extractImports": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 161,
+      "endLine": 175
+    },
+    "src/services/parser.service.ts::ParserService::clearCache": {
+      "type": "method",
+      "file": "src/services/parser.service.ts",
+      "line": 180,
+      "endLine": 182
+    },
+    "src/services/file-scanner.service.ts": {
+      "type": "file"
+    },
+    "src/services/file-scanner.service.ts::FileScannerService": {
+      "type": "class",
+      "file": "src/services/file-scanner.service.ts",
+      "line": 6,
+      "endLine": 81
+    },
+    "src/services/file-scanner.service.ts::FileScannerService::scanDirectory": {
+      "type": "method",
+      "file": "src/services/file-scanner.service.ts",
+      "line": 14,
+      "endLine": 21
+    },
+    "src/services/file-scanner.service.ts::FileScannerService::scanRecursive": {
+      "type": "method",
+      "file": "src/services/file-scanner.service.ts",
+      "line": 26,
+      "endLine": 53
+    },
+    "src/services/file-scanner.service.ts::FileScannerService::pathExists": {
+      "type": "method",
+      "file": "src/services/file-scanner.service.ts",
+      "line": 58,
+      "endLine": 60
+    },
+    "src/services/file-scanner.service.ts::FileScannerService::getProjectRoot": {
+      "type": "method",
+      "file": "src/services/file-scanner.service.ts",
+      "line": 65,
+      "endLine": 80
+    },
+    "src/services/git.service.ts": {
+      "type": "file"
+    },
+    "src/services/git.service.ts::GitService": {
+      "type": "class",
+      "file": "src/services/git.service.ts",
+      "line": 5,
+      "endLine": 82
+    },
+    "src/services/git.service.ts::GitService::getCurrentCommitHash": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 15,
+      "endLine": 28
+    },
+    "src/services/git.service.ts::GitService::getCurrentBranch": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 35,
+      "endLine": 48
+    },
+    "src/services/git.service.ts::GitService::writeGraph": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 55,
+      "endLine": 72
+    },
+    "src/services/git.service.ts::GitService::getGraphPath": {
+      "type": "method",
+      "file": "src/services/git.service.ts",
+      "line": 79,
+      "endLine": 81
+    },
+    "src/cli.ts": {
+      "type": "file"
+    },
+    "src/cli.ts::bootstrap": {
+      "type": "function",
+      "file": "src/cli.ts",
+      "line": 6,
+      "endLine": 8
+    },
+    "tests/fixtures/sample-project/src/base.ts": {
+      "type": "file"
+    },
+    "tests/fixtures/sample-project/src/base.ts::BaseService": {
+      "type": "class",
+      "file": "tests/fixtures/sample-project/src/base.ts",
+      "line": 1,
+      "endLine": 11
+    },
+    "tests/fixtures/sample-project/src/base.ts::BaseService::getName": {
+      "type": "method",
+      "file": "tests/fixtures/sample-project/src/base.ts",
+      "line": 8,
+      "endLine": 10
+    },
+    "tests/fixtures/sample-project/src/user.ts": {
+      "type": "file"
+    },
+    "tests/fixtures/sample-project/src/user.ts::UserService": {
+      "type": "class",
+      "file": "tests/fixtures/sample-project/src/user.ts",
+      "line": 9,
+      "endLine": 29
+    },
+    "tests/fixtures/sample-project/src/user.ts::UserService::addUser": {
+      "type": "method",
+      "file": "tests/fixtures/sample-project/src/user.ts",
+      "line": 16,
+      "endLine": 19
+    },
+    "tests/fixtures/sample-project/src/user.ts::UserService::getUser": {
+      "type": "method",
+      "file": "tests/fixtures/sample-project/src/user.ts",
+      "line": 21,
+      "endLine": 23
+    },
+    "tests/fixtures/sample-project/src/user.ts::UserService::logAction": {
+      "type": "method",
+      "file": "tests/fixtures/sample-project/src/user.ts",
+      "line": 25,
+      "endLine": 28
+    },
+    "tests/fixtures/sample-project/src/utils.ts": {
+      "type": "file"
+    },
+    "tests/fixtures/sample-project/src/utils.ts::formatDate": {
+      "type": "function",
+      "file": "tests/fixtures/sample-project/src/utils.ts",
+      "line": 1,
+      "endLine": 3
+    },
+    "tests/fixtures/sample-project/src/utils.ts::calculateAge": {
+      "type": "function",
+      "file": "tests/fixtures/sample-project/src/utils.ts",
+      "line": 5,
+      "endLine": 9
+    }
+  },
+  "edges": [
+    {
+      "source": "src/utils/path.util.ts::resolveImportPath",
+      "relationship": "calls",
+      "target": "src/utils/path.util.ts::normalizePath"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/commands/update.command.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/file-scanner.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/parser.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-builder.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/git.service.ts"
+    },
+    {
+      "source": "src/services/parser.service.ts",
+      "relationship": "imports",
+      "target": "src/interfaces/graph.interface.ts"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::parseFile",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::project.addSourceFileAtPath"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::parseFile",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::extractClasses"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::parseFile",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::extractFunctions"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::parseFile",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::extractImports"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::extractClasses",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::extractMethods"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::extractMethods",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::extractCalls"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::extractFunctions",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::extractCalls"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::clearCache",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::project.getSourceFiles().forEach"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::clearCache",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::project.getSourceFiles"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::clearCache",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::project.removeSourceFile"
+    },
+    {
+      "source": "src/services/file-scanner.service.ts",
+      "relationship": "imports",
+      "target": "src/utils/path.util.ts"
+    },
+    {
+      "source": "src/services/file-scanner.service.ts::FileScannerService::scanDirectory",
+      "relationship": "calls",
+      "target": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive"
+    },
+    {
+      "source": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive",
+      "relationship": "calls",
+      "target": "src/services/file-scanner.service.ts::shouldExcludePath"
+    },
+    {
+      "source": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive",
+      "relationship": "calls",
+      "target": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive"
+    },
+    {
+      "source": "src/cli.ts",
+      "relationship": "imports",
+      "target": "src/app.module.ts"
+    },
+    {
+      "source": "tests/fixtures/sample-project/src/user.ts",
+      "relationship": "imports",
+      "target": "tests/fixtures/sample-project/src/base.ts"
+    },
+    {
+      "source": "tests/fixtures/sample-project/src/user.ts",
+      "relationship": "imports",
+      "target": "tests/fixtures/sample-project/src/utils.ts"
+    },
+    {
+      "source": "tests/fixtures/sample-project/src/user.ts::UserService::addUser",
+      "relationship": "calls",
+      "target": "tests/fixtures/sample-project/src/user.ts::UserService::users.push"
+    },
+    {
+      "source": "tests/fixtures/sample-project/src/user.ts::UserService::addUser",
+      "relationship": "calls",
+      "target": "tests/fixtures/sample-project/src/user.ts::UserService::logAction"
+    },
+    {
+      "source": "tests/fixtures/sample-project/src/user.ts::UserService::getUser",
+      "relationship": "calls",
+      "target": "tests/fixtures/sample-project/src/user.ts::UserService::users.find"
+    },
+    {
+      "source": "tests/fixtures/sample-project/src/user.ts::UserService::logAction",
+      "relationship": "calls",
+      "target": "tests/fixtures/sample-project/src/user.ts::formatDate"
+    }
+  ]
+}
