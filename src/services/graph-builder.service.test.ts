@@ -1,12 +1,26 @@
-import { describe, it, expect, beforeEach, spyOn } from 'bun:test';
+import { describe, it, expect, beforeEach, afterEach, spyOn } from 'bun:test';
 import { GraphBuilderService } from './graph-builder.service';
 import type { ParsedFile } from '../interfaces/graph.interface';
+import * as fs from 'fs';
 
 describe('GraphBuilderService - Orphaned Edge Detection', () => {
   let service: GraphBuilderService;
+  let existsSyncSpy: ReturnType<typeof spyOn>;
 
   beforeEach(() => {
     service = new GraphBuilderService();
+
+    // Mock fs.existsSync to return true for test file paths
+    // This simulates all test files existing on disk
+    existsSyncSpy = spyOn(fs, 'existsSync').mockImplementation((path: string) => {
+      // Return true for any .ts or .tsx file path used in tests
+      return typeof path === 'string' && (path.endsWith('.ts') || path.endsWith('.tsx'));
+    });
+  });
+
+  afterEach(() => {
+    // Restore the fs.existsSync mock after each test
+    existsSyncSpy?.mockRestore();
   });
 
   describe('buildGraph - normal case', () => {
