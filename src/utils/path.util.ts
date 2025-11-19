@@ -31,14 +31,19 @@ export function shouldExcludePath(filePath: string): boolean {
     '*.d.ts', // TypeScript declaration files
   ];
 
+  // Split path into segments for accurate matching
+  const pathSegments = filePath.split(path.sep);
+
   return excludePatterns.some(pattern => {
     if (pattern.includes('*')) {
-      // Simple glob matching - anchor to end of string
+      // Glob pattern - match against filename
       const regexPattern = pattern.replace(/\*/g, '.*').replace(/\./g, '\\.');
       const regex = new RegExp(regexPattern + '$');
-      return regex.test(filePath);
+      const fileName = pathSegments[pathSegments.length - 1];
+      return regex.test(fileName);
     }
-    return filePath.includes(pattern);
+    // Directory patterns - match as complete segment (not substring)
+    return pathSegments.includes(pattern);
   });
 }
 

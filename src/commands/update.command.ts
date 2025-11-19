@@ -57,7 +57,8 @@ export class UpdateCommand extends CommandRunner {
 
       // Step 3: Scan for TypeScript files
       if (verbose) console.log('🔍 Scanning for TypeScript files...');
-      const files = await this.fileScannerService.scanDirectory(projectRoot);
+      const debug = process.env.CODEGRAPH_DEBUG === 'true';
+      const files = await this.fileScannerService.scanDirectory(projectRoot, undefined, debug);
       if (verbose) console.log(`✓ Found ${files.length} TypeScript files\n`);
 
       if (files.length === 0) {
