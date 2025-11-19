@@ -37,10 +37,52 @@ export function loadTsConfig(projectRoot: string): TsConfigPaths | null {
     // Read and parse tsconfig.json
     const content = fs.readFileSync(tsconfigPath, 'utf-8');
 
-    // Remove comments (simple approach - handles // and /* */ comments)
-    const contentWithoutComments = content
-      .replace(/\/\/.*$/gm, '') // Remove // comments
-      .replace(/\/\*[\s\S]*?\*\//g, ''); // Remove /* */ comments
+    // Strip comments from JSON (preserving strings)
+    // This is a simple approach that works for most tsconfig.json files
+    const lines = content.split('\n');
+    const cleanedLines = lines.map(line => {
+      // Find first non-string // or /* comment
+      let inString = false;
+      let stringChar = '';
+      let cleaned = '';
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        const nextChar = line[i + 1];
+
+        // Track string state
+        if ((char === '"' || char === "'") && (i === 0 || line[i - 1] !== '\\')) {
+          if (!inString) {
+            inString = true;
+            stringChar = char;
+          } else if (char === stringChar) {
+            inString = false;
+            stringChar = '';
+          }
+        }
+
+        // Check for comments outside strings
+        if (!inString) {
+          if (char === '/' && nextChar === '/') {
+            // Rest of line is a comment
+            break;
+          }
+          if (char === '/' && nextChar === '*') {
+            // Multi-line comment start (simplified: just skip this line)
+            break;
+          }
+        }
+
+        cleaned += char;
+      }
+
+      return cleaned;
+    });
+
+    let contentWithoutComments = cleanedLines.join('\n');
+
+    // Remove trailing commas before } or ]
+    contentWithoutComments = contentWithoutComments.replace(/,(\s*[}\]])/g, '$1');
 
     const tsconfig = JSON.parse(contentWithoutComments);
 
@@ -70,7 +112,7 @@ export function loadTsConfig(projectRoot: string): TsConfigPaths | null {
     tsconfigCache.set(projectRoot, config);
     return config;
   } catch (error) {
-    // Invalid JSON or read error
+    // Invalid JSON or read error - silently return null
     tsconfigCache.set(projectRoot, null);
     return null;
   }
