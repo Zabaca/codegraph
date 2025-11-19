@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "commitHash": "987ed6a",
-  "timestamp": "2025-11-07T03:13:34.832Z",
+  "commitHash": "a9cfbe7",
+  "timestamp": "2025-11-19T20:18:08.806Z",
   "nodes": {
     "src/utils/output-formatter.util.ts": {
       "type": "file"
@@ -265,7 +265,7 @@
       "type": "class",
       "file": "src/commands/update.command.ts",
       "line": 10,
-      "endLine": 119
+      "endLine": 132
     },
     "src/commands/update.command.ts::UpdateCommand::run": {
       "type": "method",
@@ -277,7 +277,7 @@
       "type": "method",
       "file": "src/commands/update.command.ts",
       "line": 42,
-      "endLine": 118
+      "endLine": 131
     },
     "src/interfaces/impact.interface.ts": {
       "type": "file"
@@ -370,49 +370,49 @@
       "type": "class",
       "file": "src/services/parser.service.ts",
       "line": 11,
-      "endLine": 183
+      "endLine": 197
     },
     "src/services/parser.service.ts::ParserService::parseFile": {
       "type": "method",
       "file": "src/services/parser.service.ts",
       "line": 27,
-      "endLine": 40
+      "endLine": 54
     },
     "src/services/parser.service.ts::ParserService::extractClasses": {
       "type": "method",
       "file": "src/services/parser.service.ts",
-      "line": 45,
-      "endLine": 77
+      "line": 59,
+      "endLine": 91
     },
     "src/services/parser.service.ts::ParserService::extractMethods": {
       "type": "method",
       "file": "src/services/parser.service.ts",
-      "line": 82,
-      "endLine": 102
+      "line": 96,
+      "endLine": 116
     },
     "src/services/parser.service.ts::ParserService::extractFunctions": {
       "type": "method",
       "file": "src/services/parser.service.ts",
-      "line": 107,
-      "endLine": 129
+      "line": 121,
+      "endLine": 143
     },
     "src/services/parser.service.ts::ParserService::extractCalls": {
       "type": "method",
       "file": "src/services/parser.service.ts",
-      "line": 134,
-      "endLine": 156
+      "line": 148,
+      "endLine": 170
     },
     "src/services/parser.service.ts::ParserService::extractImports": {
       "type": "method",
       "file": "src/services/parser.service.ts",
-      "line": 161,
-      "endLine": 175
+      "line": 175,
+      "endLine": 189
     },
     "src/services/parser.service.ts::ParserService::clearCache": {
       "type": "method",
       "file": "src/services/parser.service.ts",
-      "line": 180,
-      "endLine": 182
+      "line": 194,
+      "endLine": 196
     },
     "src/services/file-scanner.service.ts": {
       "type": "file"
@@ -974,11 +974,6 @@
     {
       "source": "src/commands/update.command.ts",
       "relationship": "imports",
-      "target": "src/services/graph-builder.service.ts"
-    },
-    {
-      "source": "src/commands/update.command.ts",
-      "relationship": "imports",
       "target": "src/services/git.service.ts"
     },
     {
@@ -1020,6 +1015,11 @@
       "source": "src/commands/update.command.ts::UpdateCommand::generateGraph",
       "relationship": "calls",
       "target": "src/commands/update.command.ts::UpdateCommand::parserService.parseFile"
+    },
+    {
+      "source": "src/commands/update.command.ts::UpdateCommand::generateGraph",
+      "relationship": "calls",
+      "target": "src/commands/update.command.ts::String"
     },
     {
       "source": "src/commands/update.command.ts::UpdateCommand::generateGraph",
@@ -1075,11 +1075,6 @@
       "source": "src/app.module.ts",
       "relationship": "imports",
       "target": "src/services/parser.service.ts"
-    },
-    {
-      "source": "src/app.module.ts",
-      "relationship": "imports",
-      "target": "src/services/graph-builder.service.ts"
     },
     {
       "source": "src/app.module.ts",
@@ -1154,7 +1149,17 @@
     {
       "source": "src/services/parser.service.ts::ParserService::parseFile",
       "relationship": "calls",
+      "target": "src/services/parser.service.ts::ParserService::project.getSourceFile"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::parseFile",
+      "relationship": "calls",
       "target": "src/services/parser.service.ts::ParserService::project.addSourceFileAtPath"
+    },
+    {
+      "source": "src/services/parser.service.ts::ParserService::parseFile",
+      "relationship": "calls",
+      "target": "src/services/parser.service.ts::String"
     },
     {
       "source": "src/services/parser.service.ts::ParserService::parseFile",
