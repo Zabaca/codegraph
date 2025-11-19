@@ -13,6 +13,7 @@ import {
   formatInterfaceId,
 } from '../utils/entity-id.util';
 import { resolveImportPath } from '../utils/path.util';
+import { loadTsConfig, type TsConfigPaths } from '../utils/tsconfig.util';
 
 @Injectable()
 export class GraphBuilderService {
@@ -32,6 +33,9 @@ export class GraphBuilderService {
     const edges: Edge[] = [];
     const skippedEdges: Array<{ source: string; target: string; reason: string }> = [];
 
+    // Load tsconfig for path alias resolution
+    const tsConfig = loadTsConfig(projectRoot);
+
     // First pass: Create all nodes
     for (const parsedFile of parsedFiles) {
       this.addFileNodes(parsedFile, nodes);
@@ -39,7 +43,7 @@ export class GraphBuilderService {
 
     // Second pass: Create all edges (relationships)
     for (const parsedFile of parsedFiles) {
-      this.addFileEdges(parsedFile, edges, projectRoot, nodes, skippedEdges);
+      this.addFileEdges(parsedFile, edges, projectRoot, nodes, skippedEdges, tsConfig);
     }
 
     // Report skipped edges if any
@@ -116,7 +120,8 @@ export class GraphBuilderService {
     edges: Edge[],
     projectRoot: string,
     nodes: Record<string, Node>,
-    skippedEdges: Array<{ source: string; target: string; reason: string }>
+    skippedEdges: Array<{ source: string; target: string; reason: string }>,
+    tsConfig: TsConfigPaths | null
   ): void {
     const { filePath, classes, functions, imports } = parsedFile;
     const fileId = formatFileId(filePath);
@@ -125,7 +130,7 @@ export class GraphBuilderService {
     for (const imp of imports) {
       if (imp.isTypeOnly) continue; // Skip type-only imports
 
-      const targetPath = resolveImportPath(imp.from, filePath, projectRoot);
+      const targetPath = resolveImportPath(imp.from, filePath, projectRoot, tsConfig);
       if (targetPath) {
         const targetId = formatFileId(targetPath);
 

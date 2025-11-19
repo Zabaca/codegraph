@@ -2,10 +2,12 @@ import { describe, it, expect, beforeEach, afterEach, spyOn } from 'bun:test';
 import { GraphBuilderService } from './graph-builder.service';
 import type { ParsedFile } from '../interfaces/graph.interface';
 import * as fs from 'fs';
+import * as tsconfigUtil from '../utils/tsconfig.util';
 
 describe('GraphBuilderService - Orphaned Edge Detection', () => {
   let service: GraphBuilderService;
   let existsSyncSpy: ReturnType<typeof spyOn>;
+  let loadTsConfigSpy: ReturnType<typeof spyOn>;
 
   beforeEach(() => {
     service = new GraphBuilderService();
@@ -16,11 +18,15 @@ describe('GraphBuilderService - Orphaned Edge Detection', () => {
       // Return true for any .ts or .tsx file path used in tests
       return typeof path === 'string' && (path.endsWith('.ts') || path.endsWith('.tsx'));
     });
+
+    // Mock loadTsConfig to return null (no tsconfig) for these tests
+    loadTsConfigSpy = spyOn(tsconfigUtil, 'loadTsConfig').mockReturnValue(null);
   });
 
   afterEach(() => {
-    // Restore the fs.existsSync mock after each test
+    // Restore the mocks after each test
     existsSyncSpy?.mockRestore();
+    loadTsConfigSpy?.mockRestore();
   });
 
   describe('buildGraph - normal case', () => {
@@ -304,6 +310,190 @@ describe('GraphBuilderService - Orphaned Edge Detection', () => {
       expect(warnCalls.some(msg => msg.includes('Tip:'))).toBe(true);
 
       warnSpy.mockRestore();
+    });
+  });
+
+  describe('buildGraph - path alias support', () => {
+    it('should resolve path aliases when tsconfig is present', () => {
+      // Mock tsconfig with path aliases
+      loadTsConfigSpy.mockReturnValue({
+        baseUrl: './src',
+        paths: {
+          '@api/*': ['core/api/*'],
+        },
+      });
+
+      const parsedFiles: ParsedFile[] = [
+        {
+          filePath: 'src/main.ts',
+          classes: [],
+          functions: [],
+          imports: [{ from: '@api/users', isTypeOnly: false }],
+        },
+        {
+          filePath: 'src/core/api/users.ts',
+          classes: [],
+          functions: [],
+          imports: [],
+        },
+      ];
+
+      const graph = service.buildGraph(parsedFiles, 'abc123', '/project');
+
+      // Both files should be nodes
+      expect(graph.nodes['src/main.ts']).toBeDefined();
+      expect(graph.nodes['src/core/api/users.ts']).toBeDefined();
+
+      // Edge should exist from main.ts to users.ts via alias
+      const edge = graph.edges.find(
+        e => e.source === 'src/main.ts' && e.target === 'src/core/api/users.ts'
+      );
+      expect(edge).toBeDefined();
+      expect(edge?.relationship).toBe('imports');
+    });
+
+    it('should handle multiple path mappings for same alias', () => {
+      // Mock tsconfig with multiple path mappings
+      loadTsConfigSpy.mockReturnValue({
+        baseUrl: './src',
+        paths: {
+          '@services/*': ['services/*', 'shared/services/*'],
+        },
+      });
+
+      const parsedFiles: ParsedFile[] = [
+        {
+          filePath: 'src/main.ts',
+          classes: [],
+          functions: [],
+          imports: [{ from: '@services/auth', isTypeOnly: false }],
+        },
+        {
+          filePath: 'src/shared/services/auth.ts',
+          classes: [],
+          functions: [],
+          imports: [],
+        },
+      ];
+
+      // Mock fs.existsSync to make first mapping fail, second succeed
+      existsSyncSpy.mockImplementation((p: string) => {
+        const pathStr = typeof p === 'string' ? p : '';
+        // Reject first mapping (services/auth.ts)
+        if (pathStr.includes('/src/services/auth')) {
+          return false;
+        }
+        // Accept second mapping (shared/services/auth.ts)
+        if (pathStr.includes('/src/shared/services/auth.ts')) {
+          return true;
+        }
+        // Accept all other .ts/.tsx files for normal operation
+        return pathStr.endsWith('.ts') || pathStr.endsWith('.tsx');
+      });
+
+      const graph = service.buildGraph(parsedFiles, 'abc123', '/project');
+
+      // Edge should be created using the second mapping
+      const edge = graph.edges.find(
+        e => e.source === 'src/main.ts' && e.target === 'src/shared/services/auth.ts'
+      );
+      expect(edge).toBeDefined();
+    });
+
+    it('should work without tsconfig (backward compatibility)', () => {
+      // Ensure loadTsConfig returns null
+      loadTsConfigSpy.mockReturnValue(null);
+
+      const parsedFiles: ParsedFile[] = [
+        {
+          filePath: 'src/main.ts',
+          classes: [],
+          functions: [],
+          imports: [{ from: './utils', isTypeOnly: false }],
+        },
+        {
+          filePath: 'src/utils.ts',
+          classes: [],
+          functions: [],
+          imports: [],
+        },
+      ];
+
+      const graph = service.buildGraph(parsedFiles, 'abc123', '/project');
+
+      // Relative imports should still work
+      const edge = graph.edges.find(
+        e => e.source === 'src/main.ts' && e.target === 'src/utils.ts'
+      );
+      expect(edge).toBeDefined();
+    });
+
+    it('should skip unresolved alias imports', () => {
+      // Mock tsconfig with path aliases
+      loadTsConfigSpy.mockReturnValue({
+        baseUrl: './src',
+        paths: {
+          '@api/*': ['core/api/*'],
+        },
+      });
+
+      const parsedFiles: ParsedFile[] = [
+        {
+          filePath: 'src/main.ts',
+          classes: [],
+          functions: [],
+          imports: [{ from: '@api/missing', isTypeOnly: false }],
+        },
+      ];
+
+      // Mock fs.existsSync to return false for missing file
+      existsSyncSpy.mockReturnValue(false);
+
+      const warnSpy = spyOn(console, 'warn');
+
+      const graph = service.buildGraph(parsedFiles, 'abc123', '/project');
+
+      // No edges should be created
+      expect(graph.edges).toHaveLength(0);
+
+      // No warning for unresolved alias (normal behavior for external packages)
+      // This is different from orphaned edges where the file path is resolved but not parsed
+
+      warnSpy.mockRestore();
+    });
+
+    it('should prefer more specific alias patterns', () => {
+      // Mock tsconfig with catch-all and specific patterns
+      loadTsConfigSpy.mockReturnValue({
+        baseUrl: './src',
+        paths: {
+          '@api/*': ['core/api/*'],
+          '@/*': ['./*'],
+        },
+      });
+
+      const parsedFiles: ParsedFile[] = [
+        {
+          filePath: 'src/main.ts',
+          classes: [],
+          functions: [],
+          imports: [{ from: '@api/users', isTypeOnly: false }],
+        },
+        {
+          filePath: 'src/core/api/users.ts',
+          classes: [],
+          functions: [],
+          imports: [],
+        },
+      ];
+
+      const graph = service.buildGraph(parsedFiles, 'abc123', '/project');
+
+      // Should use @api/* pattern (more specific) not @/* catch-all
+      const edge = graph.edges.find(
+        e => e.source === 'src/main.ts' && e.target === 'src/core/api/users.ts'
+      );
+      expect(edge).toBeDefined();
     });
   });
 });

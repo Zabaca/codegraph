@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import { matchPathAlias, type TsConfigPaths } from './tsconfig.util';
 
 /**
  * Normalize an absolute path to be relative to the project root
@@ -52,18 +53,44 @@ export function shouldExcludePath(filePath: string): boolean {
  * @param importFrom The import path (e.g., "./utils", "@/services/user")
  * @param fromFile The file doing the importing
  * @param projectRoot Project root directory
+ * @param tsConfig Optional tsconfig path configuration for alias resolution
  * @returns Resolved file path or null if cannot be resolved
  */
 export function resolveImportPath(
   importFrom: string,
   fromFile: string,
-  projectRoot: string
+  projectRoot: string,
+  tsConfig?: TsConfigPaths | null
 ): string | null {
   // Handle relative imports
   if (importFrom.startsWith('.')) {
     const fromDir = path.dirname(fromFile);
     const basePath = path.join(projectRoot, fromDir, importFrom);
 
+    return tryResolveCandidates([basePath], projectRoot);
+  }
+
+  // Handle absolute/alias imports (e.g., "@/services/user", "@api/users")
+  if (tsConfig) {
+    const aliasCandidates = matchPathAlias(importFrom, tsConfig, projectRoot);
+
+    if (aliasCandidates.length > 0) {
+      return tryResolveCandidates(aliasCandidates, projectRoot);
+    }
+  }
+
+  // Unable to resolve (likely node_modules or external package)
+  return null;
+}
+
+/**
+ * Try to resolve a list of candidate base paths to actual files
+ * @param basePaths List of base paths to try
+ * @param projectRoot Project root directory
+ * @returns Resolved file path or null if no candidate exists
+ */
+function tryResolveCandidates(basePaths: string[], projectRoot: string): string | null {
+  for (const basePath of basePaths) {
     // Try multiple resolution strategies in order
     const candidates = [
       basePath + '.ts',           // ./utils -> ./utils.ts
@@ -83,12 +110,8 @@ export function resolveImportPath(
         continue;
       }
     }
-
-    // No valid file found
-    return null;
   }
 
-  // Handle absolute/alias imports (e.g., "@/services/user")
-  // For now, return null - would need tsconfig path mapping
+  // No valid file found
   return null;
 }
