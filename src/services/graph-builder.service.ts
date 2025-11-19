@@ -30,6 +30,7 @@ export class GraphBuilderService {
   ): GraphData {
     const nodes: Record<string, Node> = {};
     const edges: Edge[] = [];
+    const skippedEdges: Array<{ source: string; target: string; reason: string }> = [];
 
     // First pass: Create all nodes
     for (const parsedFile of parsedFiles) {
@@ -38,7 +39,19 @@ export class GraphBuilderService {
 
     // Second pass: Create all edges (relationships)
     for (const parsedFile of parsedFiles) {
-      this.addFileEdges(parsedFile, edges, projectRoot);
+      this.addFileEdges(parsedFile, edges, projectRoot, nodes, skippedEdges);
+    }
+
+    // Report skipped edges if any
+    if (skippedEdges.length > 0) {
+      console.warn(`\n⚠️  Warning: Skipped ${skippedEdges.length} edges to files that weren't parsed:`);
+      const uniqueTargets = new Set(skippedEdges.map(e => e.target));
+      uniqueTargets.forEach(target => {
+        const sources = skippedEdges.filter(e => e.target === target).map(e => e.source);
+        console.warn(`   • ${target}`);
+        console.warn(`     Referenced by: ${sources.slice(0, 3).join(', ')}${sources.length > 3 ? ` (+${sources.length - 3} more)` : ''}`);
+      });
+      console.warn(`   Tip: These files may be excluded, outside the scan directory, or failed to parse.\n`);
     }
 
     return {
@@ -101,7 +114,9 @@ export class GraphBuilderService {
   private addFileEdges(
     parsedFile: ParsedFile,
     edges: Edge[],
-    projectRoot: string
+    projectRoot: string,
+    nodes: Record<string, Node>,
+    skippedEdges: Array<{ source: string; target: string; reason: string }>
   ): void {
     const { filePath, classes, functions, imports } = parsedFile;
     const fileId = formatFileId(filePath);
@@ -112,11 +127,23 @@ export class GraphBuilderService {
 
       const targetPath = resolveImportPath(imp.from, filePath, projectRoot);
       if (targetPath) {
-        edges.push({
-          source: fileId,
-          relationship: 'imports',
-          target: formatFileId(targetPath),
-        });
+        const targetId = formatFileId(targetPath);
+
+        // Only create edge if target node exists
+        if (nodes[targetId]) {
+          edges.push({
+            source: fileId,
+            relationship: 'imports',
+            target: targetId,
+          });
+        } else {
+          // Track skipped edge for reporting
+          skippedEdges.push({
+            source: fileId,
+            target: targetId,
+            reason: 'Target file not parsed as node',
+          });
+        }
       }
     }
 
