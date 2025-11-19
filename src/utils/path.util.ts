@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as fs from 'fs';
 
 /**
  * Normalize an absolute path to be relative to the project root
@@ -56,14 +57,30 @@ export function resolveImportPath(
   // Handle relative imports
   if (importFrom.startsWith('.')) {
     const fromDir = path.dirname(fromFile);
-    let resolved = path.join(projectRoot, fromDir, importFrom);
+    const basePath = path.join(projectRoot, fromDir, importFrom);
 
-    // Try adding .ts extension
-    if (!resolved.endsWith('.ts')) {
-      resolved += '.ts';
+    // Try multiple resolution strategies in order
+    const candidates = [
+      basePath + '.ts',           // ./utils -> ./utils.ts
+      basePath + '.tsx',          // ./component -> ./component.tsx
+      basePath + '/index.ts',     // ./auth -> ./auth/index.ts
+      basePath + '/index.tsx',    // ./components -> ./components/index.tsx
+      basePath,                   // Already has extension
+    ];
+
+    for (const candidate of candidates) {
+      try {
+        if (fs.existsSync(candidate)) {
+          return normalizePath(candidate, projectRoot);
+        }
+      } catch (error) {
+        // Permission error or other issue, continue to next candidate
+        continue;
+      }
     }
 
-    return normalizePath(resolved, projectRoot);
+    // No valid file found
+    return null;
   }
 
   // Handle absolute/alias imports (e.g., "@/services/user")

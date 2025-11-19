@@ -68,6 +68,7 @@ export class UpdateCommand extends CommandRunner {
       // Step 4: Parse each file
       if (verbose) console.log('🔬 Parsing TypeScript files...');
       const parsedFiles: ParsedFile[] = [];
+      const parseErrors: Array<{ file: string; error: string }> = [];
 
       for (const file of files) {
         const relativePath = normalizePath(file, projectRoot);
@@ -76,11 +77,23 @@ export class UpdateCommand extends CommandRunner {
           parsedFiles.push(parsed);
           if (verbose) process.stdout.write('.');
         } catch (error) {
-          console.error(`\n⚠️  Error parsing ${relativePath}:`, error);
+          const errorMsg = error instanceof Error ? error.message : String(error);
+          parseErrors.push({ file: relativePath, error: errorMsg });
+          if (verbose) process.stdout.write('✗');
         }
       }
 
-      if (verbose) console.log(` ✓ Parsed ${parsedFiles.length} files\n`);
+      if (verbose) {
+        console.log(` ✓ Parsed ${parsedFiles.length} files\n`);
+        if (parseErrors.length > 0) {
+          console.warn(`⚠️  Failed to parse ${parseErrors.length} file(s):`);
+          parseErrors.forEach(({ file, error }) => {
+            console.warn(`   • ${file}`);
+            console.warn(`     Error: ${error}`);
+          });
+          console.log();
+        }
+      }
 
       // Step 5: Build graph
       if (verbose) console.log('🏗️  Building dependency graph...');

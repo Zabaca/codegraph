@@ -25,7 +25,21 @@ export class ParserService {
    * @returns Parsed file data
    */
   parseFile(filePath: string, relativePath: string): ParsedFile {
-    const sourceFile = this.project.addSourceFileAtPath(filePath);
+    // Check if file is already in the project
+    let sourceFile = this.project.getSourceFile(filePath);
+
+    if (!sourceFile) {
+      try {
+        sourceFile = this.project.addSourceFileAtPath(filePath);
+      } catch (error) {
+        // Provide more context in error message
+        throw new Error(`Failed to add source file at ${filePath}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
+
+    if (!sourceFile) {
+      throw new Error(`Source file not found or could not be loaded: ${filePath}`);
+    }
 
     const classes = this.extractClasses(sourceFile);
     const functions = this.extractFunctions(sourceFile);
