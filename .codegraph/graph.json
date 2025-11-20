@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "commitHash": "a9cfbe7",
-  "timestamp": "2025-11-19T20:18:08.806Z",
+  "commitHash": "52f853b",
+  "timestamp": "2025-11-19T22:20:51.582Z",
   "nodes": {
     "src/utils/output-formatter.util.ts": {
       "type": "file"
@@ -54,6 +54,33 @@
       "line": 242,
       "endLine": 250
     },
+    "src/utils/tsconfig.util.ts": {
+      "type": "file"
+    },
+    "src/utils/tsconfig.util.ts::loadTsConfig": {
+      "type": "function",
+      "file": "src/utils/tsconfig.util.ts",
+      "line": 22,
+      "endLine": 119
+    },
+    "src/utils/tsconfig.util.ts::matchPathAlias": {
+      "type": "function",
+      "file": "src/utils/tsconfig.util.ts",
+      "line": 128,
+      "endLine": 180
+    },
+    "src/utils/tsconfig.util.ts::matchPattern": {
+      "type": "function",
+      "file": "src/utils/tsconfig.util.ts",
+      "line": 188,
+      "endLine": 207
+    },
+    "src/utils/tsconfig.util.ts::clearTsConfigCache": {
+      "type": "function",
+      "file": "src/utils/tsconfig.util.ts",
+      "line": 212,
+      "endLine": 214
+    },
     "src/utils/entity-id.util.ts": {
       "type": "file"
     },
@@ -99,20 +126,26 @@
     "src/utils/path.util.ts::normalizePath": {
       "type": "function",
       "file": "src/utils/path.util.ts",
-      "line": 9,
-      "endLine": 14
+      "line": 11,
+      "endLine": 16
     },
     "src/utils/path.util.ts::shouldExcludePath": {
       "type": "function",
       "file": "src/utils/path.util.ts",
-      "line": 21,
-      "endLine": 42
+      "line": 23,
+      "endLine": 49
     },
     "src/utils/path.util.ts::resolveImportPath": {
       "type": "function",
       "file": "src/utils/path.util.ts",
-      "line": 51,
-      "endLine": 72
+      "line": 59,
+      "endLine": 84
+    },
+    "src/utils/path.util.ts::tryResolveCandidates": {
+      "type": "function",
+      "file": "src/utils/path.util.ts",
+      "line": 92,
+      "endLine": 117
     },
     "src/utils/graph-traversal.util.ts": {
       "type": "file"
@@ -265,7 +298,7 @@
       "type": "class",
       "file": "src/commands/update.command.ts",
       "line": 10,
-      "endLine": 132
+      "endLine": 133
     },
     "src/commands/update.command.ts::UpdateCommand::run": {
       "type": "method",
@@ -277,7 +310,7 @@
       "type": "method",
       "file": "src/commands/update.command.ts",
       "line": 42,
-      "endLine": 131
+      "endLine": 132
     },
     "src/interfaces/impact.interface.ts": {
       "type": "file"
@@ -421,37 +454,37 @@
       "type": "class",
       "file": "src/services/file-scanner.service.ts",
       "line": 6,
-      "endLine": 115
+      "endLine": 152
     },
     "src/services/file-scanner.service.ts::FileScannerService::scanDirectory": {
       "type": "method",
       "file": "src/services/file-scanner.service.ts",
-      "line": 16,
-      "endLine": 29
+      "line": 17,
+      "endLine": 33
     },
     "src/services/file-scanner.service.ts::FileScannerService::scanRecursive": {
       "type": "method",
       "file": "src/services/file-scanner.service.ts",
-      "line": 34,
-      "endLine": 78
+      "line": 38,
+      "endLine": 115
     },
     "src/services/file-scanner.service.ts::FileScannerService::isPermissionError": {
       "type": "method",
       "file": "src/services/file-scanner.service.ts",
-      "line": 83,
-      "endLine": 87
+      "line": 120,
+      "endLine": 124
     },
     "src/services/file-scanner.service.ts::FileScannerService::pathExists": {
       "type": "method",
       "file": "src/services/file-scanner.service.ts",
-      "line": 92,
-      "endLine": 94
+      "line": 129,
+      "endLine": 131
     },
     "src/services/file-scanner.service.ts::FileScannerService::getProjectRoot": {
       "type": "method",
       "file": "src/services/file-scanner.service.ts",
-      "line": 99,
-      "endLine": 114
+      "line": 136,
+      "endLine": 151
     },
     "src/services/graph-reader.service.ts": {
       "type": "file"
@@ -633,6 +666,51 @@
       "line": 158,
       "endLine": 175
     },
+    "src/services/graph-builder.service.ts": {
+      "type": "file"
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService": {
+      "type": "class",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 18,
+      "endLine": 271
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService::buildGraph": {
+      "type": "method",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 27,
+      "endLine": 68
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService::addFileNodes": {
+      "type": "method",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 73,
+      "endLine": 113
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges": {
+      "type": "method",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 118,
+      "endLine": 219
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService::resolveClassName": {
+      "type": "method",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 225,
+      "endLine": 230
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService::resolveInterfaceName": {
+      "type": "method",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 235,
+      "endLine": 242
+    },
+    "src/services/graph-builder.service.ts::GraphBuilderService::resolveCallTarget": {
+      "type": "method",
+      "file": "src/services/graph-builder.service.ts",
+      "line": 250,
+      "endLine": 270
+    },
     "src/cli.ts": {
       "type": "file"
     },
@@ -722,7 +800,27 @@
       "target": "src/utils/output-formatter.util.ts::getRiskRecommendation"
     },
     {
+      "source": "src/utils/tsconfig.util.ts::matchPathAlias",
+      "relationship": "calls",
+      "target": "src/utils/tsconfig.util.ts::matchPattern"
+    },
+    {
+      "source": "src/utils/path.util.ts",
+      "relationship": "imports",
+      "target": "src/utils/tsconfig.util.ts"
+    },
+    {
       "source": "src/utils/path.util.ts::resolveImportPath",
+      "relationship": "calls",
+      "target": "src/utils/path.util.ts::tryResolveCandidates"
+    },
+    {
+      "source": "src/utils/path.util.ts::resolveImportPath",
+      "relationship": "calls",
+      "target": "src/utils/path.util.ts::matchPathAlias"
+    },
+    {
+      "source": "src/utils/path.util.ts::tryResolveCandidates",
       "relationship": "calls",
       "target": "src/utils/path.util.ts::normalizePath"
     },
@@ -974,6 +1072,11 @@
     {
       "source": "src/commands/update.command.ts",
       "relationship": "imports",
+      "target": "src/services/graph-builder.service.ts"
+    },
+    {
+      "source": "src/commands/update.command.ts",
+      "relationship": "imports",
       "target": "src/services/git.service.ts"
     },
     {
@@ -1075,6 +1178,11 @@
       "source": "src/app.module.ts",
       "relationship": "imports",
       "target": "src/services/parser.service.ts"
+    },
+    {
+      "source": "src/app.module.ts",
+      "relationship": "imports",
+      "target": "src/services/graph-builder.service.ts"
     },
     {
       "source": "src/app.module.ts",
@@ -1217,6 +1325,11 @@
       "target": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive"
     },
     {
+      "source": "src/services/file-scanner.service.ts::FileScannerService::scanDirectory",
+      "relationship": "calls",
+      "target": "src/services/file-scanner.service.ts::FileScannerService::skippedDirs.forEach"
+    },
+    {
       "source": "src/services/file-scanner.service.ts::FileScannerService::scanRecursive",
       "relationship": "calls",
       "target": "src/services/file-scanner.service.ts::shouldExcludePath"
@@ -1310,6 +1423,111 @@
       "source": "src/services/impact-analysis.service.ts::ImpactAnalysisService::filterByThreshold",
       "relationship": "calls",
       "target": "src/services/impact-analysis.service.ts::ImpactAnalysisService::createEmptyReport"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts",
+      "relationship": "imports",
+      "target": "src/interfaces/graph.interface.ts"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts",
+      "relationship": "imports",
+      "target": "src/utils/entity-id.util.ts"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts",
+      "relationship": "imports",
+      "target": "src/utils/path.util.ts"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts",
+      "relationship": "imports",
+      "target": "src/utils/tsconfig.util.ts"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::buildGraph",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::loadTsConfig"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::buildGraph",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::GraphBuilderService::addFileNodes"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::buildGraph",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileNodes",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatFileId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileNodes",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatClassId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileNodes",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatMethodId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileNodes",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatFunctionId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatFileId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::resolveImportPath"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatClassId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::GraphBuilderService::resolveClassName"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::GraphBuilderService::resolveInterfaceName"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatMethodId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::GraphBuilderService::resolveCallTarget"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::addFileEdges",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatFunctionId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::resolveCallTarget",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatMethodId"
+    },
+    {
+      "source": "src/services/graph-builder.service.ts::GraphBuilderService::resolveCallTarget",
+      "relationship": "calls",
+      "target": "src/services/graph-builder.service.ts::formatFunctionId"
     },
     {
       "source": "src/cli.ts",
